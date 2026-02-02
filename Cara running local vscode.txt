@@ -1,0 +1,14 @@
+
+#LOKAL VSCODE
+python -m venv venv
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
+.\venv\Scripts\activate
+python -m pip install --upgrade pip
+pip install -r requirements.txt --default-timeout=1000
+
+
+#sesudah install requirements
+Set-ExecutionPolicy -ExecutionPolicy Bypass -Scope Process -Force
+.\venv\Scripts\activate
+streamlit run app.py
+Deactivate
