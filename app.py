@@ -86,14 +86,11 @@ def preprocess_data(df):
 
 @st.cache_resource
 def get_models(X_train, y_train):
-    """
-    Melatih model dengan parameter EXACT dari notebook.
-    """
     # A. Baseline (Default Parameters)
     model_baseline = GradientBoostingRegressor(random_state=42)
     model_baseline.fit(X_train, y_train)
     
-    # B. Tuned Model (Parameter dari Notebook)
+    # B. Tuned Model
     best_params = {
         'learning_rate': 0.11852892694151533,
         'max_depth': 2,
@@ -136,16 +133,16 @@ if not df.empty:
         st.header("📂 1. Dataset Overview")
         st.info("""
         **📝 Alur Analisis:**
-        Tahap awal adalah memahami struktur data. Dataset ini mencakup variabel sosial-ekonomi pembangun IKP. 
+        Tahap awal adalah memahami struktur data. Dataset ini mencakup 9 variabel pembangun IKP. 
         Statistik deskriptif di bawah digunakan untuk melihat sebaran awal sebelum pemodelan.
         """)
-        st.dataframe(df, use_container_width=True)
+        st.dataframe(df.head(), use_container_width=True)
         st.markdown("### 📊 Statistik Deskriptif")
         st.dataframe(df.describe().T[['mean', 'std', 'min', 'max']].style.format("{:.2f}"), use_container_width=True)
 
     # --- 2. PREPROCESSING ---
     elif menu == "2. Preprocessing":
-        st.header("🔍 2. Exploratory Data Analysis (EDA)")
+        st.header("🔍 2. Preprocessing")
         st.info("""
         **📝 Mengapa harus di preprocessing?**
         Data sosial-ekonomi seringkali memiliki *outliers*. Digunakan **Robust Scaler** agar model tidak bias terhadap nilai ekstrem.
@@ -167,7 +164,7 @@ if not df.empty:
     # --- 3. PERFORMA ---
     elif menu == "3. Performa & Learning Curve":
         st.header("🚀 3. Performa Model & Learning Curve")
-        st.subheader("A. Perbandingan: Default vs Tuned")
+        st.subheader("A. Perbandingan Model: Default vs Tuned")
         st.info("""
         **📝 Evaluasi Model:**
         Membandingkan model Baseline (Default) vs Tuned (Optimasi).
@@ -246,7 +243,7 @@ if not df.empty:
         st.header("⭐ 4. Feature Importance (SHAP)")
         st.info("""
         **📝 Interpretasi Fitur:**
-        Menggunakan **SHAP Value** untuk melihat kontribusi fitur.
+        Menggunakan **SHAP Value** untuk melihat kontribusi setiap fitur.
         """)
         
         with st.spinner("Menghitung SHAP Values (Menggunakan X_train sebagai background)..."):
