@@ -175,9 +175,6 @@ if not df.empty:
         with col_tab2:
             st.dataframe(df, use_container_width=True)
 
-        with col_tab2:
-            st.dataframe(df, use_container_width=True)
-
     # --- 2. PREPROCESSING ---
     elif menu == "2. Preprocessing":
         st.header("🔍 2. Preprocessing & EDA")
