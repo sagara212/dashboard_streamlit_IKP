@@ -119,7 +119,7 @@ if not df.empty:
     st.sidebar.markdown("---")
     st.sidebar.caption("Oleh: M. Bagus Prayogi")
 
-    # --- 1. OVERVIEW ---
+# --- 1. OVERVIEW ---
     if "1." in menu:
         st.subheader("📂 Overview Dataset")
         st.markdown("Ringkasan statistik data IKP sebelum dilakukan pemodelan.")
@@ -135,9 +135,14 @@ if not df.empty:
         col_tab1, col_tab2 = st.tabs(["📊 Statistik Deskriptif", "📋 Tabel Data"])
         
         with col_tab1:
-            # Tabel Statistik
-            st.dataframe(df.describe().T[['mean', 'std', 'min', 'max']].style.background_gradient(cmap="Greens", subset=['mean', 'max']), use_container_width=True)
+            # FIX: Rename '50%' menjadi 'median' agar bisa dipanggil
+            stats = df.describe().T
+            stats = stats.rename(columns={'50%': 'median'})
             
+            # Tampilkan Tabel
+            st.dataframe(stats[['mean', 'median', 'std', 'min', 'max']].style.background_gradient(cmap="Greens", subset=['mean', 'max']), use_container_width=True)
+            
+            # Insight Box (Dark Mode)
             st.markdown("""
             <div style="background-color: #1f2937; padding: 20px; border-radius: 12px; border: 1px solid #374151; border-left: 5px solid #3b82f6; margin-top: 15px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);">
                 <h4 style="color: #60a5fa; margin-top: 0; margin-bottom: 12px;">💡 Insight: Statistik Deskriptif</h4>
@@ -166,6 +171,9 @@ if not df.empty:
             </div>
             """, unsafe_allow_html=True)
             # -----------------------------------------------------
+
+        with col_tab2:
+            st.dataframe(df, use_container_width=True)
 
         with col_tab2:
             st.dataframe(df, use_container_width=True)
