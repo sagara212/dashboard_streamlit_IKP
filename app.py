@@ -177,7 +177,7 @@ if not df.empty:
 
     # --- 2. PREPROCESSING ---
     elif menu == "2. Preprocessing":
-        st.header("🔍 2. Preprocessing & EDA")
+        st.header("🔍 2. Preprocessing")
         
         # Pilihan Variabel
         cols_view = [c for c in X_train_raw.columns if c != 'Intercept']
@@ -199,7 +199,7 @@ if not df.empty:
 
         st.markdown("""
 <div style="background-color: #1f2937; padding: 20px; border-radius: 12px; border: 1px solid #374151; border-left: 5px solid #10b981; margin-top: 20px; box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.3);">
-    <h4 style="color: #34d399; margin-top: 0; margin-bottom: 12px;">💡 Insight: Analisis Sebaran & Strategi Scaling</h4>
+    <h4 style="color: #34d399; margin-top: 0; margin-bottom: 12px;">💡 Insight: Preprocessing</h4>
     <p style="color: #cbd5e1; font-size: 15px; line-height: 1.6; text-align: justify; margin-bottom: 15px;">
         Visualisasi Boxplot di atas digunakan untuk mendeteksi karakteristik data. Area kotak menunjukkan rentang nilai normal, sedangkan 
         titik-titik di luar garis adalah <b style="color: #fca5a5;">pencilan (outlier)</b>, yang mengindikasikan adanya wilayah dengan kondisi ekstrem.
